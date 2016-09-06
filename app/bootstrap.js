@@ -15,5 +15,3 @@ module.exports = {
     ReactDOM.render(<Entry {...props} {...{config}}/>, root);
   }
 };
-
-

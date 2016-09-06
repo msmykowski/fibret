@@ -1,4 +1,5 @@
 module.exports = {
-  todoItems: [],
-  users: []
+  symbol: 'AAPL',
+  numberOfDays: 365,
+  chartData: []
 };

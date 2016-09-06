@@ -1,9 +1,6 @@
 const React = require('react');
 const types = require('react').PropTypes;
-const ApiPage = require('./api_page');
-const UserCreatePage = require('./user_create_page');
-const UserListPage = require('./user_list_page');
-const TodoPage = require('./todo_page');
+const {Actions} = require('p-flux');
 
 function isObject(obj) {
   return typeof obj === 'object';
@@ -22,54 +19,46 @@ function toFlattenedRoutes(routesHash) {
 }
 
 const routes = {
-  '/': 'todoList',
-  '/todoList': 'todoList',
-  '/apiPage': 'apiPage',
-  '/users': {
-    '/list': 'showUsers',
-    '/new': 'createUser'
-  }
+  '/': 'root',
+  '/:symbol/:numberOfDays': 'updateChartInfo'
 };
+
+function parseParams(route, fn) {
+  return () => {
+    const {pathname} = global.location;
+    const urlParams = pathname.split('/');
+    const params = route.split('/').reduce((memo, param, i) => {
+      memo[param.slice(1)] = urlParams[i];
+      return memo;
+    }, {});
+    fn(params);
+  };
+}
 
 class Router extends React.Component {
   static propTypes = {
     router: types.oneOfType([types.object, types.func])
   };
 
-  constructor(props, context) {
-    super(props, context);
-    const {state} = this;
-    this.state = {...state, Page: TodoPage };
-  }
-
   componentDidMount() {
     const {router} = this.props;
     Object.entries(toFlattenedRoutes(routes)).map(([path, callbackName]) => {
-      router.get(path, this[callbackName]);
+      router.get(path, parseParams(path, this[callbackName]));
     });
   }
 
-  apiPage = () => {
-    this.setState({Page: ApiPage});
-  };
+  root = () => {
+    const {symbol, numberOfDays} = this.props;
+    Actions.chartDataFetch({symbol, numberOfDays});
+  }
 
-  todoList = () => {
-    this.setState({Page: TodoPage});
-  };
-
-  showUsers = () => {
-    this.setState({Page: UserListPage});
-  };
-
-  createUser = () => {
-    this.setState({Page: UserCreatePage});
-  };
+  updateChartInfo = ({symbol, numberOfDays}) => {
+    Actions.chartInfoUpdate({symbol, numberOfDays});
+    Actions.chartDataFetch({symbol, numberOfDays});
+  }
 
   render() {
-    const {Page} = this.state;
-    return (
-      <Page {...this.props}/>
-    );
+    return null;
   }
 }
 

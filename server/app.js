@@ -7,6 +7,9 @@ const {useWebpackDevMiddleware} = config;
 module.exports = function() {
   const app = express();
 
+  app.get('/market', function (req, res) {
+    res.json(JSON.stringify(require('../fake_chart_data')()));
+  });
 
   if (useWebpackDevMiddleware) {
     const webpackHotMiddleware = require('pui-react-tools/middleware/webpack');
@@ -19,6 +22,5 @@ module.exports = function() {
   } else {
     app.use(express.static(path.join(__dirname, '..', 'public')));
   }
-
   return app;
 };
