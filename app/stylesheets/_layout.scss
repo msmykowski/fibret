@@ -1,4 +1,11 @@
-.pui-react-starter {
-  padding: 20px;
-  color: darkblue;
+@import '_colors';
+
+html {
+  background-color: $dark-bg;
+  color: $white;
+  font-size: 20px;
+  font-family: Gill Sans, sans-serif;
 }
+ body {
+   margin: 0;
+ }

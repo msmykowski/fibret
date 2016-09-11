@@ -1,6 +1,6 @@
 {
-  "globalNamespace": "MyReactStarter",
-  "title": "My React Starter",
+  "globalNamespace": "FibRet",
+  "title": "FibRet",
   "scripts": [
     "application.js"
   ],

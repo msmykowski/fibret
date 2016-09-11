@@ -12,10 +12,11 @@
   },
 
   "globals": {
-    "MyReactStarter": true,
+    "FibRet": true,
     "root": true,
     "Bluebird": true,
     "Dispatcher": true,
+    "Deferred": true,
     "jQuery": true,
     "MockPromises": true,
     "React": true,

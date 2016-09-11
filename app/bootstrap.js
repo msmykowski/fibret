@@ -7,11 +7,11 @@ module.exports = {
     if (typeof document === 'undefined') return;
     require('./stylesheets/application.scss');
     require('babel!pui-react-tools/assets/entry-loader?name=index.html!./components/application');
-    invariant(global.MyReactStarter,
+    invariant(global.FibRet,
       `globalNamespace in application.json has been changed without updating global variable name bootstrap.js.
-      Please change "MyReactStarter" in bootstrap.js to your current globalNamespace`
+      Please change "FibRet" in bootstrap.js to your current globalNamespace`
     );
-    const {config} = global.MyReactStarter;
+    const {config} = global.FibRet;
     ReactDOM.render(<Entry {...props} {...{config}}/>, root);
   }
 };

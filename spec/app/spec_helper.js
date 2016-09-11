@@ -31,7 +31,7 @@ beforeAll(() => {
     Dispatcher,
     jQuery,
     MockPromises,
-    MyReactStarter: {},
+    FibRet: {},
     React,
     ReactDOM,
     $: jQuery,
@@ -46,7 +46,7 @@ afterAll(() => {
 });
 
 beforeEach(() => {
-  global.MyReactStarter = {config: {}};
+  global.FibRet = {config: {}};
 
   $('body').find('#root').remove().end().append('<div id="root"/>');
   Cursor.async = false;

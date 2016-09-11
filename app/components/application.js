@@ -6,6 +6,7 @@ const {useStore} = require('p-flux');
 const {useRouter} = require('./use_router');
 const Router = require('./router');
 const MainPage = require('./main_page');
+const Header = require('./header');
 
 class Application extends React.Component {
   static propTypes = {
@@ -16,9 +17,10 @@ class Application extends React.Component {
 
   render() {
     const {config, store, router} = this.props;
-    if (global.MyReactStarter) global.MyReactStarter.store = store;
+    if (global.FibRet) global.FibRet.store = store;
     return (
       <div>
+        <Header {...{symbol: store.symbol}}/>
         <MainPage {...store}/>
         <Router {...{config, router}} {...store}/>
       </div>
